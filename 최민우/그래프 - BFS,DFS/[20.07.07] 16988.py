@@ -9,39 +9,35 @@
 - 첫째 줄에 현재 판에서 돌 2개를 두어 죽일 수 있는 상대 돌의 최대 갯수를 출력한다.
 """
 
-"""
-개같네
-"""
 from collections import deque
-from pprint import pprint
 
 dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
 
 # 빈칸(0)에 검은돌(1)을 두개씩 넣고 BFS 를 돌려볼까?
-def bfs(start_pos):
-    visited = []
-    queue = deque(start_pos)
+def bfs(init_pos):
+    queue = deque([init_pos])
+    flag = True
     return_value = 0
     while queue:
         pos = queue.popleft()
         if pos not in visited:
             visited.append(pos)
-            if return_value >= 0:
-                return_value += 1
             pos_x, pos_y = pos
             for dx, dy in dirs:
                 if 0 <= pos_x + dx < m and 0 <= pos_y + dy < n:
                     if field[pos_y + dy][pos_x + dx] == 0:
+                        flag = False
                     if field[pos_y + dy][pos_x + dx] == 2:
                         queue.append((pos_x + dx, pos_y + dy))
-    return return_value
+    return return_value if flag else 0
 
 
 n, m = map(int, input().split())
 field = [list(map(int, input().split())) for _ in range(n)]
 white_pos = []
 blank_pos = []
+visited = []
 
 for y in range(n):
     for x in range(m):
@@ -57,8 +53,11 @@ for i in range(1, len(blank_pos)):
         sel1, sel2 = blank_pos[i], blank_pos[j]
         field[sel1[1]][sel1[0]] = 1
         field[sel2[1]][sel2[0]] = 1
-        value = bfs(field, white_pos)
-        result = max(result, value)
+        visited = []
+        sum_value = 0
+        for start_pos in white_pos:
+            sum_value += bfs(start_pos)
+        result = max(result, sum_value)
         field[sel1[1]][sel1[0]] = 0
         field[sel2[1]][sel2[0]] = 0
 print(result)
