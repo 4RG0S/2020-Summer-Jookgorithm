@@ -1,21 +1,6 @@
 import sys
 from collections import deque
 
-# TODO 멘탈 바사삭
-
-"""
-입력
-입력의 첫째 줄에는 R과 C가 주어진다. 단, 1 ≤ R, C ≤ 1500.
-
-각 R줄 동안 C 만큼의 문자열이 주어진다.
-
-'.'은 물 공간, 'X'는 빙판 공간, 'L'은 백조가 있는 공간으로 나타낸다.
-1 0 2
-
-출력
-첫째 줄에 문제에서 주어진 걸리는 날을 출력한다.
-"""
-
 
 def bfs():
     global time_table, blank_pos, swan_pos, w, h
