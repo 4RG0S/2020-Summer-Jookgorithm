@@ -13,7 +13,7 @@ class player:
         if self.work[2]:
             return True
         else:
-            return self.work[0] + self.work[1] - 2
+            return self.work[0] + self.work[1] - 2 > 0
 
     def getName(self):
         return self.name
@@ -43,12 +43,10 @@ for line in open(input('Path\t: '), 'r', encoding='utf8').read().split('\n'):
 
     # 날짜 변경 + 문제풀이 점검
     if "---------------" in line:
-        day = line.split()[-2]
-        today = line.split()[1:4]
         bad_player = []
         bad_team = set()
 
-        if day not in ['일요일', '월요일']:  # 토요일 / 일요일
+        if day not in ['토요일', '일요일']:  # 토요일 / 일요일
             for student in playerList:
                 if not student.isFinished():
                     bad_player.append(student.getName())
@@ -57,7 +55,7 @@ for line in open(input('Path\t: '), 'r', encoding='utf8').read().split('\n'):
                             bad_team.add(', '.join(team[i]))
         if bad_player:
             print('\n* ', end='')
-            print(' '.join(today))
+            print(' '.join(today) + ' 검거')
             print('미제출\t: ' + ', '.join(bad_player))
             print('회식\t: ' + ', '.join(map(str, bad_team)))
 
@@ -65,5 +63,7 @@ for line in open(input('Path\t: '), 'r', encoding='utf8').read().split('\n'):
         # New Day!
         for student in playerList:
             student.newDay()
+        day = line.split()[-2]
+        today = line.split()[1:4]
 
 input('\n계속하려면 아무 키나 누르십시오')
