@@ -1,16 +1,21 @@
-garbage, w = map(int, input().split())
+n = 1000
+field = [False, False] + [True] * (n - 1)
+primes = []
 
-h = list(map(int, input().split()))
-result = 0
-for height in range(max(h), 0 - 1, -1):
-    flag = False
-    count = 0
-    for block in h:
-        if block >= height:
-            result += count
-            count = 0
-            flag = True
-        elif flag:
-            count += 1
+for i in range(2, n + 1):
+    if field[i]:
+        primes.append(i)
+        for j in range(2 * i, n + 1, i):
+            field[j] = False
 
-print(result)
+
+def solve(num):
+    for x in primes:
+        for y in primes:
+            for z in primes:
+                if x + y + z == num:
+                    return "%d %d %d" % (x, y, z)
+
+
+for _ in range(int(input())):
+    print(solve(int(input())))
