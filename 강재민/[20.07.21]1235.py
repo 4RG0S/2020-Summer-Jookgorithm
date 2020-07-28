@@ -11,4 +11,3 @@ for j in range(1,len(num[0])+1):
         print(j)
         break
 
-
