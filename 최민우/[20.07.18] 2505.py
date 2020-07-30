@@ -4,8 +4,8 @@ def _2505_front(array):
     for t in range(2):
         for i in range(1, length + 1):
             if array[i] != i:
-                result += '%d %d\n' % (i, array.index(i))
-                array[i:array.index(i) + 1] = array[array.index(i):i - 1:-1]
+                result += '%d %d\n' % (i, array.i(i))
+                array[i:array.i(i) + 1] = array[array.i(i):i - 1:-1]
                 break
 
     for i in range(1, length + 1):
@@ -26,8 +26,8 @@ def _2505_back(array):
         # 0, n, n-1, ...
         for i in range(1, length + 1):
             if array[i] != length - i + 1:
-                result += '%d %d\n' % (length - array.index(length - i + 1) + 1, length - i + 1)
-                array[i:array.index(length - i + 1) + 1] = array[array.index(length - i + 1):i - 1:-1]
+                result += '%d %d\n' % (length - array.i(length - i + 1) + 1, length - i + 1)
+                array[i:array.i(length - i + 1) + 1] = array[array.i(length - i + 1):i - 1:-1]
                 break
 
     if result.count('\n') != 2:
