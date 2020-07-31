@@ -1,29 +1,26 @@
 def cut(num, x, y):
-    global field, result
+    global field
     symbol = field[y][x]
     if num == 1:
-        result[symbol] += 1
-        return
+        return symbol
     dirs = [(i, j) for i in range(num) for j in range(num)]
+
     flag = True
     for dx, dy in dirs:
         if field[y + dy][x + dx] != symbol:
             flag = False
             break
     if flag:
-        result[symbol] += 1
-        return
+        return symbol
     delta = num // 2
-    dirs = [(i * delta, j * delta) for i in range(3) for j in range(3)]
+    dirs = [(i * delta, j * delta) for j in range(2) for i in range(2)]
+    return_value = "("
     for new_x, new_y in dirs:
-        cut(delta, x + new_x, y + new_y)
-    return
+        return_value += cut(delta, x + new_x, y + new_y)
+    return return_value + ")"
 
 
-m = int(input())
-field = [list(map(int, input().split())) for _ in range(m)]
-result = [0, 0, 0]  # 0, 1, -1
+n = int(input())
+field = [list(input()) for _ in range(n)]
 
-cut(m, 0, 0)
-result.insert(0, result.pop())
-print('\n'.join(map(str, result)))
+print(cut(n, 0, 0))
