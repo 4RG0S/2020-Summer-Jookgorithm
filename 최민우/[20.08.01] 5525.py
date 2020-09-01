@@ -25,5 +25,5 @@ while queue:
     elif q == 'I':
         ready = True
     p = q
-    
+
 print(result)
